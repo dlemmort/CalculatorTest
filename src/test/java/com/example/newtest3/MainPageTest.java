@@ -21,7 +21,7 @@ public class MainPageTest {
 
     @BeforeAll
     public static void setUpAll() {
-        WebDriverManager.firefoxdriver().setup();
+        WebDriverManager.firefoxdriver().avoidBrowserDetection().setup();
     }
 
     @BeforeEach
