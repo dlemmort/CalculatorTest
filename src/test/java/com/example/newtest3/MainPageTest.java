@@ -21,12 +21,12 @@ public class MainPageTest {
 
     @BeforeAll
     public static void setUpAll() {
-        WebDriverManager.chromedriver().setup();
+        WebDriverManager.firefoxdriver().setup();
     }
 
     @BeforeEach
     public void setUp() {
-        driver = new ChromeDriver();
+        driver = new FirefoxDriver();
     }
 
     @AfterEach
