@@ -4,9 +4,11 @@ import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.selenide.AllureSelenide;
+import org.checkerframework.checker.units.qual.C;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.chromium.ChromiumDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
@@ -21,12 +23,18 @@ public class MainPageTest {
 
     @BeforeAll
     public static void setUpAll() {
-        WebDriverManager.firefoxdriver().avoidBrowserDetection().setup();
+        WebDriverManager.chromedriver().avoidBrowserDetection().setup();
+
+
+
     }
 
     @BeforeEach
     public void setUp() {
-        driver = new FirefoxDriver();
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--no-sandbox");
+        chromeOptions.addArguments("--headless");
+        driver = new ChromeDriver(chromeOptions);
     }
 
     @AfterEach
