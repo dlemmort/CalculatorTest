@@ -32,12 +32,14 @@
       <artifactId>allure-selenide</artifactId>
       <version>${allure.version}</version>
       <scope>test</scope>
-    </dependency>                <dependency>
+    </dependency>
+    <dependency>
       <groupId>io.github.bonigarcia</groupId>
       <artifactId>webdrivermanager</artifactId>
       <version>5.2.0</version>
-      <scope>test</scope>
-    </dependency>                                            <dependency>
+    </dependency>
+
+    <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
       <version>${junit.version}</version>

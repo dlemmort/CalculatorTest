@@ -2,8 +2,14 @@ package com.example.newtest3;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.*;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chromium.ChromiumDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import static com.codeborne.selenide.Condition.attribute;
@@ -11,39 +17,30 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 
 public class MainPageTest {
-    MainPage mainPage = new MainPage();
+    WebDriver driver;
 
-    @BeforeAll        public static void setUpAll() {
-        Configuration.browserSize = "1280x800";
-            SelenideLogger.addListener("allure", new AllureSelenide());
-        }
-
-    @BeforeEach        public void setUp() {
-        open("https://www.jetbrains.com/");
+    @BeforeAll
+    public static void setUpAll() {
+        WebDriverManager.chromedriver().setup();
     }
 
-    @Test
-    public void search() {
-        mainPage.searchButton.click();
-
-        $("[data-test='search-input']").sendKeys("Selenium");
-        $("button[data-test='full-search-button']").click();
-
-        $("input[data-test='search-input']").shouldHave(attribute("value", "Selenium"));
+    @BeforeEach
+    public void setUp() {
+        driver = new ChromeDriver();
     }
 
-    @Test
-    public void toolsMenu() {
-        mainPage.toolsMenu.click();
-
-        $("div[data-test='main-submenu']").shouldBe(visible);
+    @AfterEach
+    public void teardown(){
+        driver.quit();
     }
 
+
     @Test
-    public void navigationToAllTools() {
-        mainPage.seeAllToolsButton.click();
+    public void checkTitle() {
+        driver.get("https://google.com");
+        String title = driver.getTitle();
+        String assertedTitle = "Google";
 
-        $("#products-page").shouldBe(visible);
+        assertEquals(title,assertedTitle);            }
+    }
 
-        assertEquals("All Developer Tools and Products by JetBrains", Selenide.title());            }
-}
