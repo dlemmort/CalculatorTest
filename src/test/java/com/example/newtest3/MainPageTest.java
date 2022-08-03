@@ -23,7 +23,7 @@ public class MainPageTest {
 
     @BeforeAll
     public static void setUpAll() {
-        WebDriverManager.chromedriver().avoidBrowserDetection().setup();
+        WebDriverManager.chromedriver().setup();
 
 
 
